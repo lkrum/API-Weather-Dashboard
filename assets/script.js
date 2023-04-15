@@ -13,19 +13,34 @@
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 
+// variable statements
+var searchFormEl = $('#search');
+var searchBtn = $('#search-btn')
+var searchHistoryEl = $('#search-history-container');
+var searchHistory;
+var city;
+
+
 // variables
 var apiKey = "40b10aa426a06b771a72b081e7b57995";
-var city;
 var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 
+// search bar function
+$('#search-btn').click(function() {
+  var city = $('#search-input').val();
+  localStorage.setItem('city', city);
+
+});
+
+
+// api function
 function getApi() {
 fetch(queryURL)
-  .then(function (response) {
+  .then(function(response) {
     return response.json();
   })
-  .then(function (data) {
+  .then(function(data) {
     console.log(data)
-
-
-
+});
 }
+
