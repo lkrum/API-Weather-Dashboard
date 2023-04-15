@@ -1,0 +1,11 @@
+header {
+  background-image:linear-gradient(to right, #9eb3ff, #3c5bc8, #293ba5, #192984);
+  padding: 8px;
+  text-align: right;
+  padding-right: 200px;
+  color: white;
+}
+
+h1 {
+    font-size: 38px;
+}
