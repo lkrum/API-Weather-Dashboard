@@ -26,6 +26,11 @@ h1 {
   padding-left: 5px;
 }
 
+#search-input {
+width: 100% !important;
+margin-left: 3px;
+}
+
 #search-btn {
   width: 100% !important;
   margin-left: 3px !important;
@@ -40,7 +45,8 @@ h1 {
 #border {
   border-bottom: solid black 1px;
   margin-top: 20px;
-  width: 70%;
+  margin-left: 4px;
+  width: 55%;
 }
 
 #search-history {

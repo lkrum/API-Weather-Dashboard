@@ -22,7 +22,9 @@ var city;
 
 // variables
 var apiKey = "40b10aa426a06b771a72b081e7b57995";
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+var lat;
+var lon;
+var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
 
 
 function renderHistory() {
@@ -68,10 +70,11 @@ $('#search-btn').click(function(event) {
 // api function
 function getApi() {
   fetch(queryURL)
-    .then(function (response) {
+    .then(function(response) {
       return response.json();
     })
-    .then(function () {
+    .then(function(data) {
+      console.log(data);
     });
 }
 
