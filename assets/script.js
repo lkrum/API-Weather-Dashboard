@@ -21,9 +21,9 @@ var fiveDayForEl = $('#five-day-forecast');
 
 // variables
 var apiKey = "40b10aa426a06b771a72b081e7b57995";
-var lat;
-var lon;
 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+var lon;
+var lat;
 var latlonURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 var historyArray = [];
 var city = $('#search-input').val();;
@@ -37,8 +37,7 @@ function renderHistory(city) {
     var li = $('<li>');
     li.text(searchHistory);
     searchList.append(li);
-}
-  
+  }
 }
 
 // store search history in local storage
@@ -67,47 +66,40 @@ $('#search-btn').click(function (event) {
 
   storeSearchHistory();
   renderHistory();
-  // getApi();
+  getCityCoord(searchText);
 });
 
 // get city coordinates
-function getCityCoord() {
-  fetch(latlonURL)
+// AskBCS Learning Assistant helped me pass the city variable into the function and then call the function correctly
+function getCityCoord(city) {
+  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-    });
-}
+      var lon = data[0].lon;
+      var lat = data[0].lat;
+      getWeatherForecast(lon, lat);
+    })
+  }
 
-getCityCoord();
+  // api function
+  function getWeatherForecast(lon, lat) {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        
+      })
 
-// getCityCoord();
+  }
 
-// api function
-// function getApi() {
-//   fetch(queryURL)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       for (var i = 0; i < data.length; i++) {
-//         for (var i = 0; i < data.length; i++) {
-//           var createTableRow = document.createElement('tr');
-//           var tableData = document.createElement('td');
-//           var link = document.createElement('a');
+getWeatherForecast();
 
-//           link.text(data[i].html_url);
-//           link.href = data[i].html_url;
-//           tableData.append(link);
-//           createTableRow.append(tableData);
-//           $('#city-weather').append(createTableRow);
-//         }
-//       };
-//     });
-// }
+
 
 // function searchApi(query,) {
 //   var locQueryUrl = 'https://www.loc.gov/search/?fo=json';
