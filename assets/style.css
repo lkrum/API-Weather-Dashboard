@@ -43,3 +43,13 @@ color: rgb(241, 241, 241)
   margin-top: 20px;
   width: 70%;
 }
+
+#search-history {
+text-align: center;
+margin-top: 15px;
+border-radius: 4px;
+background-color: #7d9de6;
+border: none;
+padding: 3px;
+
+}
