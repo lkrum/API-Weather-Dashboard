@@ -20,7 +20,7 @@ var cityWeatherEl = $('#city-weather');
 var fiveDayForEl = $('#five-day-forecast');
 
 // variables
-var apiKey = "40b10aa426a06b771a72b081e7b57995";
+var apiKey = '0c5f34ee552bf2cf8fb400c1e3120e45';
 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 var lon;
 var lat;
@@ -28,8 +28,7 @@ var latlonURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&
 var historyArray = [];
 var city = $('#search-input').val();;
 
-function renderHistory(city) {
-
+function renderHistory() {
   searchList.text('');
   // for-loop to create new list elements with each search input
   for (var i = 0; i < historyArray.length; i++) {
@@ -67,6 +66,7 @@ $('#search-btn').click(function (event) {
   storeSearchHistory();
   renderHistory();
   getCityCoord(searchText);
+  getWeatherForecast()
 });
 
 // get city coordinates
@@ -96,8 +96,6 @@ function getCityCoord(city) {
       })
 
   }
-
-getWeatherForecast();
 
 
 
