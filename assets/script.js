@@ -16,32 +16,34 @@ var searchFormEl = $('#search');
 var searchBtn = $('#search-btn')
 var searchHistoryEl = $('#search-history-container');
 var searchList = $('#search-list');
-var historyArray = [];
-var city;
-
+var cityWeatherEl = $('#city-weather');
+var fiveDayForEl = $('#five-day-forecast');
 
 // variables
 var apiKey = "40b10aa426a06b771a72b081e7b57995";
 var lat;
 var lon;
-var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
+var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+var latlonURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
+var historyArray = [];
+var city = $('#search-input').val();;
 
+function renderHistory(city) {
 
-function renderHistory() {
   searchList.text('');
-  city = $('#search-input').val();
   // for-loop to create new list elements with each search input
   for (var i = 0; i < historyArray.length; i++) {
     var searchHistory = historyArray[i];
     var li = $('<li>');
     li.text(searchHistory);
-    searchList.append(li)
-  }
+    searchList.append(li);
+}
+  
 }
 
 // store search history in local storage
 function storeSearchHistory() {
-localStorage.setItem('city', JSON.stringify(historyArray));
+  localStorage.setItem('city', JSON.stringify(historyArray));
 }
 
 // get stored search history from local storage
@@ -49,7 +51,7 @@ function init() {
   var storedHistory = JSON.parse(localStorage.getItem('city'));
 
   if (storedHistory !== null) {
-    historyArray = storedHistory;
+    storedHistory += historyArray;
   }
   storedHistory.push(city);
   renderHistory();
@@ -57,7 +59,7 @@ function init() {
 
 
 // search bar event listener function
-$('#search-btn').click(function(event) {
+$('#search-btn').click(function (event) {
   event.preventDefault();
   var searchText = searchInput.val();
   historyArray.push(searchText);
@@ -65,21 +67,48 @@ $('#search-btn').click(function(event) {
 
   storeSearchHistory();
   renderHistory();
+  // getApi();
 });
 
-// api function
-function getApi() {
-  fetch(queryURL)
-    .then(function(response) {
+// get city coordinates
+function getCityCoord() {
+  fetch(latlonURL)
+    .then(function (response) {
       return response.json();
     })
-    .then(function(data) {
+    .then(function (data) {
       console.log(data);
     });
 }
 
+getCityCoord();
+
+// getCityCoord();
+
+// api function
+// function getApi() {
+//   fetch(queryURL)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       for (var i = 0; i < data.length; i++) {
+//         for (var i = 0; i < data.length; i++) {
+//           var createTableRow = document.createElement('tr');
+//           var tableData = document.createElement('td');
+//           var link = document.createElement('a');
+
+//           link.text(data[i].html_url);
+//           link.href = data[i].html_url;
+//           tableData.append(link);
+//           createTableRow.append(tableData);
+//           $('#city-weather').append(createTableRow);
+//         }
+//       };
+//     });
+// }
 
 // function searchApi(query,) {
 //   var locQueryUrl = 'https://www.loc.gov/search/?fo=json';
 
-// fetchButton.addEventListener('click', getApi);
