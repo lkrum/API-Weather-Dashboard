@@ -1,5 +1,5 @@
 header {
-  background-image:linear-gradient(to right, #9eb3ff, #3c5bc8, #293ba5, #192984);
+  background-image: linear-gradient(to right, #9eb3ff, #3c5bc8, #293ba5, #192984);
   padding: 8px;
   text-align: right;
   padding-right: 200px;
@@ -7,7 +7,7 @@ header {
 }
 
 h1 {
-    font-size: 38px;
+  font-size: 38px;
 }
 
 .search {
@@ -19,25 +19,24 @@ h1 {
   font-size: 30px;
   font-weight: bold;
   padding: 5px
-
 }
 
 #search-form {
-  width: 70% !important;
+  width: 55% !important;
   padding-left: 5px;
 }
 
 #search-btn {
-width: 70% !important;
-margin-left: 3px !important;
-margin-top: 15px;
-border-radius: 4px;
-background-color: #7d9de6;
-border: none;
-padding: 3px;
-color: rgb(241, 241, 241)
-
+  width: 100% !important;
+  margin-left: 3px !important;
+  margin-top: 15px;
+  border-radius: 4px;
+  background-color: #7d9de6;
+  border: none;
+  padding: 3px;
+  color: rgb(241, 241, 241)
 }
+
 #border {
   border-bottom: solid black 1px;
   margin-top: 20px;
@@ -45,11 +44,23 @@ color: rgb(241, 241, 241)
 }
 
 #search-history {
-text-align: center;
-margin-top: 15px;
-border-radius: 4px;
-background-color: #7d9de6;
-border: none;
-padding: 3px;
+  text-align: center;
+  margin-top: 15px;
+  border-radius: 4px;
+  background-color: #7d9de6;
+  border: none;
+  padding: 3px;
+}
 
+#search-list li {
+  text-align: center;
+  width: 22% !important;
+  list-style: none;
+  border-radius: 4px;
+  background-color: #b3b3b3;
+  padding-top: 20px;
+  padding: 3px;
+  margin-bottom: 10px;
+  margin-left: -25px;
+  color: rgb(0, 0, 0)
 }

@@ -1,7 +1,4 @@
-// GIVEN a weather dashboard with form inputs
-// find form on bootstrap
 // WHEN I search for a city
-// need to save search history in local storage
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 // connect to weather API
 // need to take search history from local storage and display it on page
@@ -31,34 +28,40 @@ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&a
 function renderHistory() {
   searchList.text('');
   city = $('#search-input').val();
-  // var searchHistory = historyArray[i];
-  localStorage.setItem('city', JSON.stringify(historyArray));
   // for-loop to create new list elements with each search input
   for (var i = 0; i < historyArray.length; i++) {
     var searchHistory = historyArray[i];
     var li = $('<li>');
     li.text(searchHistory);
-    li.attr('history-index', i);
     searchList.append(li)
   }
+}
+
+// store search history in local storage
+function storeSearchHistory() {
+localStorage.setItem('city', JSON.stringify(historyArray));
 }
 
 // get stored search history from local storage
 function init() {
   var storedHistory = JSON.parse(localStorage.getItem('city'));
+
+  if (storedHistory !== null) {
+    historyArray = storedHistory;
+  }
   storedHistory.push(city);
-  // localStorage.setItem('city', JSON.stringify(historyArray));
   renderHistory();
 }
+
 
 // search bar event listener function
 $('#search-btn').click(function(event) {
   event.preventDefault();
-  // city = $('#search-input').val();
   var searchText = searchInput.val();
   historyArray.push(searchText);
-  searchInput.value = '';
+  searchInput.val('');
 
+  storeSearchHistory();
   renderHistory();
 });
 
