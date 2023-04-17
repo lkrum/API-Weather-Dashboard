@@ -13,6 +13,8 @@ h1 {
 .search {
   width: 40%;
   padding-bottom: 20px;
+  height: 100%;
+  vertical-align: top;
 }
 
 .search h2 {
@@ -69,4 +71,14 @@ margin-left: 3px;
   margin-bottom: 10px;
   margin-left: -25px;
   color: rgb(0, 0, 0)
+}
+
+#city-weather {
+  width: 60%;
+  border: black solid 1px;
+  padding: 6px;
+}
+
+#five-day-forecast {
+  position: relative;
 }

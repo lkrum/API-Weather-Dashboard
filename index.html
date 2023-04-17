@@ -18,8 +18,9 @@
   <header>
     <h1>Weather Dashboard</h1>
   </header>
+
   <!-- search bar on left side of page -->
-  <div class="col-12 col-md-6 col-lg-4 search">
+  <div class="search">
     <h2>Search for a city:</h2>
     <form id="search-form" class="form w-100">
       <input name="search-input" id="search-input" class="form-input w-100" type="text" placeholder="City Name">
@@ -27,26 +28,26 @@
     </form>
     <div id="border"></div>
   </div>
-<!-- search history displayed below search bar-->
-<div id="search-history-container"></div>
-  <ul id="search-list"></ul>
-</div>
-
-<!-- city weather conditions -->
-<div id="city-weather" class="col-8">
-  <h2 id="city-name"></h2>
-  <p id="temp"></p>
-  <p id="wind"></p>
-  <p id="humidity"></p>
-
-</div>
-<!-- 5-day forecast -->
-<div id="five-day-forecast" class="col-8">
-  <div class="day-card">
-
+  <!-- search history displayed below search bar-->
+  <div id="search-history-container">
+    <ul id="search-list"></ul>
   </div>
-</div>
-
+  <!-- city weather conditions -->
+  <div id="city-weather">
+    <h2 id="city-name">Placeholder City</h2>
+    <p id="temp">Temp:</p>
+    <p id="wind">Wind:</p>
+    <p id="humidity">Humidity:</p>
+  </div>
+  <!-- 5-day forecast -->
+  <div id="five-day-forecast" class="search">
+    <h2>5-Day Forecast</h2>
+    <div class="day-card"></div>
+    <div class="day-card"></div>
+    <div class="day-card"></div>
+    <div class="day-card"></div>
+    <div class="day-card"></div>
+  </div>
 
 
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
