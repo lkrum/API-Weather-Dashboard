@@ -22,6 +22,7 @@ var cityNameEl = $('#city-name');
 var dateTempEl = $('.temp');
 var dateWindEl = $('.wind');
 var datetHumidityEl = $('.humidity');
+var dateEl = $('.date');
 
 // variables
 var apiKey = '0c5f34ee552bf2cf8fb400c1e3120e45';
@@ -102,15 +103,16 @@ function getWeatherForecast(lon, lat) {
       for (let i = 0; i < days.length; i++) {
         var cityName = data[city];
         var dateTemp = data.list[days[i]].main.temp;
-        console.log(data.list[days[i]].main.temp);
         var dateWind = data.list[days[i]].wind.speed
         var datetHumidity = data.list[days[i]].main.humidity
-        var dateDate = data.list[days[i]].dt_txt + '' + dayjs().day()
-        var dateDateEl = $()
+        var dateDate = data.list[days[i]].dt_txt 
+        // var dateDateEl = $()
+        var dateDate = data.list[days[i]].dt_txt 
         $('#city-name').text(cityName + dayjs().format('MM/DD/YYYY'));
-        $('.temp').text('Temp: ' + dateTemp + '\u00B0');
-        $('.wind').text('Wind: ' + dateWind + 'mph');
+        $('.temp').text('Temp: ' + dateTemp + '\u00B0' + 'F');
+        $('.wind').text('Wind:' + dateWind + 'mph');
         $('.humidity').text('Humidity: ' + datetHumidity + '%')
+        $('.date').text(dayjs().format('MM/DD/YYYY'));
       }
     })
 }
