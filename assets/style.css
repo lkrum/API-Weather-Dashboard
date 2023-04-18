@@ -33,6 +33,7 @@ h1 {
 
 #search-input {
 margin-left: 3px;
+padding: 7px;
 }
 
 #search-btn {
@@ -42,7 +43,7 @@ margin-left: 3px;
   border-radius: 4px;
   background-color: #7d9de6;
   border: none;
-  padding: 3px;
+  padding: 10px;
   color: rgb(241, 241, 241)
 }
 
@@ -68,18 +69,22 @@ margin-left: 3px;
   border-radius: 4px;
   background-color: #b3b3b3;
   padding-top: 20px;
-  padding: 3px;
+  padding: 10px;
   margin-bottom: 10px;
   margin-left: -25px;
   color: rgb(0, 0, 0)
 }
 
-#city-weather {
+#day-one {
   border: black solid 1px;
   padding: 6px;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 900px;
+}
+
+#city-name {
+  font-size: 25px;
 }
 
 #five-day-forecast {
@@ -95,10 +100,11 @@ flex-direction: row;
 .day-card {
 color: white;
 background-color: #4d4c5d;
-width: 50%;
+width: 100% !important;
 padding: 5px 80px 20px 5px;
 margin: 10px;
 list-style: none;
 text-align: left;
 line-height: 30px;
+display: inline;
 }

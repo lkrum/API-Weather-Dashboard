@@ -18,6 +18,10 @@ var searchHistoryEl = $('#search-history-container');
 var searchList = $('#search-list');
 var cityWeatherEl = $('#city-weather');
 var fiveDayForEl = $('#five-day-forecast');
+var cityNameEl = $('#city-name');
+var dateTempEl = $('.temp');
+var dateWindEl = $('.wind');
+var datetHumidityEl = $('.humidity');
 
 // variables
 var apiKey = '0c5f34ee552bf2cf8fb400c1e3120e45';
@@ -26,7 +30,7 @@ var lon;
 var lat;
 var latlonURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 var historyArray = [];
-var city = $('#search-input').val();;
+var city = $('#search-input').val();
 
 function renderHistory() {
   searchList.text('');
@@ -82,23 +86,31 @@ function getCityCoord(city) {
       var lat = data[0].lat;
       getWeatherForecast(lon, lat);
     })
-  }
+}
 
-  // api function
-  function getWeatherForecast(lon, lat) {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        
-      })
+// api function
+function getWeatherForecast(lon, lat) {
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
 
-  }
-
-
-
-// function searchApi(query,) {
-//   var locQueryUrl = 'https://www.loc.gov/search/?fo=json';
-
+  // appending specific city information onto web page
+      var days = [0, 8, 15, 23, 31, 39];
+      for (let i = 0; i < days.length; i++) {
+        var cityName = data[city];
+        var dateTemp = data.list[days[i]].main.temp;
+        console.log(data.list[days[i]].main.temp);
+        var dateWind = data.list[days[i]].wind.speed
+        var datetHumidity = data.list[days[i]].main.humidity
+        var dateDate = data.list[days[i]].dt_txt + '' + dayjs().day()
+        var dateDateEl = $()
+        $('#city-name').text(cityName + dayjs().format('MM/DD/YYYY'));
+        $('.temp').text('Temp: ' + dateTemp + '\u00B0');
+        $('.wind').text('Wind: ' + dateWind + 'mph');
+        $('.humidity').text('Humidity: ' + datetHumidity + '%')
+      }
+    })
+}
