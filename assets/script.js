@@ -18,11 +18,8 @@ var searchHistoryEl = $('#search-history-container');
 var searchList = $('#search-list');
 var cityWeatherEl = $('#city-weather');
 var fiveDayForEl = $('#five-day-forecast');
-var cityNameEl = $('#city-name');
-var dateTempEl = $('.temp');
-var dateWindEl = $('.wind');
-var datetHumidityEl = $('.humidity');
-var dateEl = $('.date');
+var cityNameEl = document.getElementById('city-name');
+
 
 // variables
 var apiKey = '0c5f34ee552bf2cf8fb400c1e3120e45';
@@ -86,6 +83,7 @@ function getCityCoord(city) {
       var lon = data[0].lon;
       var lat = data[0].lat;
       getWeatherForecast(lon, lat);
+      cityName = city;
     })
 }
 
@@ -97,22 +95,48 @@ function getWeatherForecast(lon, lat) {
     })
     .then(function (data) {
       console.log(data);
+      console.log(data.list[0].main.temp);
+      // appending specific city information onto web page. Need index at 0, 8, 15, 23, 31, and 39
+         
+        // var dateTemp = data.list[days[i]].main.temp;
+        // var dateWind = data.list[days[i]].wind.speed;
+        // var datetHumidity = data.list[days[i]].main.humidity;
+        // var dateDate = data.list[days[i]].dt_txt; 
+      
+      // Day 1 
+      
+      var dayOneTempEl = document.getElementsByClassName('day-one-temp');
+      var dayOneWindEl = document.getElementsByClassName('day-one-wind');
+      var dayOneHumidityEl = document.getElementsByClassName('day-one-humidity');
+      // const dateOne = document.getElementsByClassName('day-one-date');
 
-  // appending specific city information onto web page
-      var days = [0, 8, 15, 23, 31, 39];
-      for (let i = 0; i < days.length; i++) {
-        var cityName = data[city];
-        var dateTemp = data.list[days[i]].main.temp;
-        var dateWind = data.list[days[i]].wind.speed
-        var datetHumidity = data.list[days[i]].main.humidity
-        var dateDate = data.list[days[i]].dt_txt 
-        // var dateDateEl = $()
-        var dateDate = data.list[days[i]].dt_txt 
-        $('#city-name').text(cityName + dayjs().format('MM/DD/YYYY'));
-        $('.temp').text('Temp: ' + dateTemp + '\u00B0' + 'F');
-        $('.wind').text('Wind:' + dateWind + 'mph');
-        $('.humidity').text('Humidity: ' + datetHumidity + '%')
-        $('.date').text(dayjs().format('MM/DD/YYYY'));
-      }
+      dayOneTempEl.textContent = 'Temp: ' + data.list[0].main.temp + '\u00B0' + 'F';
+      dayOneWindEl.textContent = 'Wind:' + data.list[0].wind.speed + 'mph';
+      dayOneHumidityEl.textContent = 'Humidity: ' + data.list[0].main.humidity + '%';
+      // dateOne.textContent = (dayjs().format('MM/DD/YYYY'));
+      
+      // Day 2
+
+      var dayTwoTempEl = document.getElementsByClassName('day-two-temp');
+      var dayTwoWindEl = document.getElementsByClassName('day-two-wind');
+      var dayTwoHumidityEl = document.getElementsByClassName('day-two-humidity');
+      const dayTwoEl = document.getElementsByClassName('day-two-date');
+
+      dayTwoTempEl.textContent = 'Temp: ' + data.list[8].main.temp + '\u00B0' + 'F';
+      dayTwoWindEl.textContent = 'Wind:' + data.list[8].wind.speed + 'mph';
+      dayTwoHumidityEl.textContent = 'Humidity: ' + data.list[8].main.humidity + '%';
+      // dayTwoEl.textContent = dateOne.add(1, 'day');
+
+      // Day 3
+
+      var dayThreeTempEl = document.getElementsByClassName('day-three-temp');
+      var dayThreeWindEl = document.getElementsByClassName('day-three-wind');
+      var dayThreeHumidityEl = document.getElementsByClassName('day-three-humidity');
+      var dayThreeEl = document.getElementsByClassName('day-three-date');
+
+      dayThreeTempEl.textContent = 'Temp: ' + data.list[15].main.temp + '\u00B0' + 'F';
+      dayThreeWindEl.textContent = 'Wind:' + data.list[15].wind.speed + 'mph';
+      dayThreeHumidityEl.textContent = 'Humidity: ' + data.list[15].main.humidity + '%';
+      
     })
 }
