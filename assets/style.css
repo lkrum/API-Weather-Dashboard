@@ -63,9 +63,11 @@ h1 {
   padding: 3px;
 }
 
-#search-list li {
+#search-list button {
   text-align: center;
   list-style: none;
+  width: 110%;
+  border: none;
   border-radius: 4px;
   background-color: #b3b3b3;
   padding-top: 20px;
@@ -76,13 +78,15 @@ h1 {
 }
 
 #day-0 {
+  text-align: center;
   border: black solid 2px;
   padding: 6px;
   padding-left: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 900px;
-  background-color: #2cb1da;
+  background-color: #ebebeb;
+  padding: 10px;
 }
 
 #city-name {
@@ -121,23 +125,24 @@ h1 {
 
 .temp {
   font-size: 20px;
-  text-align: left;
-  color: #feb78a; 
+  text-align: center;
+  background-color: #e8a175; 
   font-weight: 800;
+  padding: 10px;
 }
 
 .wind {
 font-size: 20px;
-text-align: left;
-color: #adc5ff;
+text-align: center;
+background-color: #98b0e8;
 font-weight: 800;
-
+padding: 10px;
 }
 
 .humidity {
   font-size: 20px;
-  text-align: left;
-  color: #6fd1ff;
+  text-align: center;
+  background-color: hsl(199, 100%, 72%, .8);
   font-weight: 800;
-
+  padding: 10px;
 }

@@ -1,16 +1,12 @@
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
-// variable statements
-var searchInput = $('#search-input')
-var searchFormEl = $('#search');
-var searchBtn = $('#search-btn')
-var searchHistoryEl = $('#search-history-container');
-var searchList = $('#search-list');
-var cityWeatherEl = $('#city-weather');
-var fiveDayForEl = $('#five-day-forecast');
+// variable expressions
+var searchInput = document.getElementById('search-input')
+var searchFormEl = document.getElementById('search');
+var searchBtn = document.getElementById('search-btn')
+var searchHistoryEl = document.getElementById('search-history-container');
+var searchList = document.getElementById('search-list');
+var cityWeatherEl = document.getElementById('city-weather');
+var fiveDayForEl = document.getElementById('five-day-forecast');
 var cityNameEl = document.getElementById('city-name');
-
 
 // variables
 var apiKey = '40b10aa426a06b771a72b081e7b57995';
@@ -19,23 +15,20 @@ var lon;
 var lat;
 var latlonURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 var historyArray = [];
-var city = $('#search-input').val();
+var city = document.getElementById('search-input').value;
 
 function renderHistory() {
-  searchList.text('');
+  searchList.textContent = ('');
   // for-loop to create new list elements with each search input
   for (var i = 0; i < historyArray.length; i++) {
     var searchHistory = historyArray[i];
-    var li = $('<li>');
-    li.text(searchHistory);
-    searchList.append(li);
-    // var searchHistButton = document.createElement('button');
+    var button = document.createElement('button');
+    button.textContent = searchHistory;
+    searchList.appendChild(button);
+    button.addEventListener('click', function() {
+      getCityCoord(this.textContent);
+    })
   }
-}
-
-// store search history in local storage
-function storeSearchHistory() {
-  localStorage.setItem('city', JSON.stringify(historyArray));
 }
 
 // get stored search history from local storage
@@ -43,19 +36,26 @@ function init() {
   var storedHistory = JSON.parse(localStorage.getItem('city'));
 
   if (storedHistory !== null) {
-    storedHistory += historyArray;
+   historyArray = storedHistory;
   }
-  storedHistory.push(city);
   renderHistory();
 }
 
+// store search history in local storage
+function storeSearchHistory() {
+  localStorage.setItem('city', JSON.stringify(historyArray));
+}
 
 // search bar event listener function
-$('#search-btn').click(function (event) {
+searchBtn.addEventListener('click', function (event) {
   event.preventDefault();
-  var searchText = searchInput.val();
+  var searchText = searchInput.value;
+  if (searchText === "") {
+    return;
+  }
+
   historyArray.push(searchText);
-  searchInput.val('');
+  searchInput.value = '';
 
   storeSearchHistory();
   renderHistory();
@@ -75,7 +75,6 @@ function getCityCoord(city) {
       var lon = data[0].lon;
       var lat = data[0].lat;
       getWeatherForecast(lon, lat);
-      // call one city function here
       cityName = city;
     })
 }
@@ -91,13 +90,12 @@ function getWeatherForecast(lon, lat) {
       console.log(data);
       var cityDisplay = document.querySelector('#city-name')
       cityDisplay.textContent = data.city.name;
-      // appending specific city information onto web page. Need index at 0, 8, 15, 23, 31, and 39
+      // appending specific city information onto web page. Need index at 0, 8, 15, 23, 31, and 39 to get 6 days of weather
       var days = [0, 8, 15, 23, 31, 39];
       for (let i = 0; i < days.length; i++) {
         // Patrick Lake (bootcamp tutor) helped me with the day- + i iteration
         var dayCardEl = document.getElementById('day-' + i);
         var weatherData = data.list[days[i]];
-        console.log(weatherData)    
 
         // iterating the date
         var firstDay = dayjs();
@@ -127,4 +125,5 @@ function getWeatherForecast(lon, lat) {
     })
 }
 
-
+// renders the local storage data on page load
+init()
