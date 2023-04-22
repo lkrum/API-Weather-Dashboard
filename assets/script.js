@@ -1,7 +1,3 @@
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5 - day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 
@@ -33,6 +29,7 @@ function renderHistory() {
     var li = $('<li>');
     li.text(searchHistory);
     searchList.append(li);
+    // var searchHistButton = document.createElement('button');
   }
 }
 
@@ -63,7 +60,7 @@ $('#search-btn').click(function (event) {
   storeSearchHistory();
   renderHistory();
   getCityCoord(searchText);
- 
+
 });
 
 // get city coordinates
@@ -83,6 +80,7 @@ function getCityCoord(city) {
     })
 }
 
+
 // api function
 function getWeatherForecast(lon, lat) {
   fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
@@ -91,73 +89,42 @@ function getWeatherForecast(lon, lat) {
     })
     .then(function (data) {
       console.log(data);
-
+      var cityDisplay = document.querySelector('#city-name')
+      cityDisplay.textContent = data.city.name;
+      // appending specific city information onto web page. Need index at 0, 8, 15, 23, 31, and 39
       var days = [0, 8, 15, 23, 31, 39];
       for (let i = 0; i < days.length; i++) {
+        // Patrick Lake (bootcamp tutor) helped me with the day- + i iteration
         var dayCardEl = document.getElementById('day-' + i);
+        var weatherData = data.list[days[i]];
+        console.log(weatherData)    
+
+        // iterating the date
+        var firstDay = dayjs();
         var dateDisplay = dayCardEl.querySelector('.date');
-        var dateData = data.list[days[i]];
-        console.log(dateData)
-        dateDisplay.textContent = 'card' + i;
-        // var dateTempEl = document.getElementsByClassName('temp');
+        dateDisplay.style.fontWeight = "900";
+        dateDisplay.textContent = firstDay.add(i, 'day').format('MM/DD/YYYY');
 
-        // // cityName = data[city];
-        // dateTemp = data.list[days[i]].main.temp;
-        // console.log(data.list[days[i]].main.temp);
-        // var dateWind = data.list[days[i]].wind.speed
-        // var datetHumidity = data.list[days[i]].main.humidity
-        // var dateDate = data.list[days[i]].dt_txt
+        // iterating the icon
+        var icon = weatherData.weather[0].icon
+        var iconDisplay = dayCardEl.querySelector('.icon');
+        // Jessica Saddington directed me to the link where the weather icons were stored
+        iconDisplay.src = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
 
-        // // var dateDateEl = $()
-        
-        // $('#city-name').text(cityName + dayjs().format('MM/DD/YYYY'));
-        // dateTempEl.textContent = 'Temp: ' + dateTemp + '\u00B0';
-        // $('.wind').text('Wind: ' + dateWind + 'mph');
-        // $('.humidity').text('Humidity: ' + datetHumidity + '%')
-        // $('.date').text(dayjs().format('MM/DD/YYYY'));
+        // iterating the temperature
+        var tempDisplay = dayCardEl.querySelector('.temp');
+        // found degree symbol from GirlDevelopItChicago
+        tempDisplay.textContent = 'Temp: ' + weatherData.main.temp + '\u00B0' + 'F';
+
+        // iterating the humidity
+        var humidityDisplay = dayCardEl.querySelector('.humidity');
+        humidityDisplay.textContent = 'Humidity: ' + weatherData.main.humidity + '%';
+
+        // iterating the wind speed
+        var windDisplay = dayCardEl.querySelector('.wind');
+        windDisplay.textContent = 'Wind speed: ' + weatherData.wind.speed + 'mph';
       }
     })
-
 }
 
-// appending specific city information onto web page. Need index at 0, 8, 15, 23, 31, and 39
 
-      // var dateTemp = data.list[days[i]].main.temp;
-      // var dateWind = data.list[days[i]].wind.speed;
-      // var datetHumidity = data.list[days[i]].main.humidity;
-      // var dateDate = data.list[days[i]].dt_txt;
-
-      // Day 1
-
-      // var dayOneTempEl = document.getElementsByClassName('day-one-temp');
-      // var dayOneWindEl = document.getElementsByClassName('day-one-wind');
-      // var dayOneHumidityEl = document.getElementsByClassName('day-one-humidity');
-      // // const dateOne = document.getElementsByClassName('day-one-date');
-
-      // dayOneTempEl.textContent = 'Temp: ' + data.list[0].main.temp + '\u00B0' + 'F';
-      // dayOneWindEl.textContent = 'Wind:' + data.list[0].wind.speed + 'mph';
-      // dayOneHumidityEl.textContent = 'Humidity: ' + data.list[0].main.humidity + '%';
-      // // dateOne.textContent = (dayjs().format('MM/DD/YYYY'));
-
-      // // Day 2
-
-      // var dayTwoTempEl = document.getElementsByClassName('day-two-temp');
-      // var dayTwoWindEl = document.getElementsByClassName('day-two-wind');
-      // var dayTwoHumidityEl = document.getElementsByClassName('day-two-humidity');
-      // const dayTwoEl = document.getElementsByClassName('day-two-date');
-
-      // dayTwoTempEl.textContent = 'Temp: ' + data.list[8].main.temp + '\u00B0' + 'F';
-      // dayTwoWindEl.textContent = 'Wind:' + data.list[8].wind.speed + 'mph';
-      // dayTwoHumidityEl.textContent = 'Humidity: ' + data.list[8].main.humidity + '%';
-      // // dayTwoEl.textContent = dateOne.add(1, 'day');
-
-      // // Day 3
-
-      // var dayThreeTempEl = document.getElementsByClassName('day-three-temp');
-      // var dayThreeWindEl = document.getElementsByClassName('day-three-wind');
-      // var dayThreeHumidityEl = document.getElementsByClassName('day-three-humidity');
-      // var dayThreeEl = document.getElementsByClassName('day-three-date');
-
-      // dayThreeTempEl.textContent = 'Temp: ' + data.list[15].main.temp + '\u00B0' + 'F';
-      // dayThreeWindEl.textContent = 'Wind:' + data.list[15].wind.speed + 'mph';
-      // dayThreeHumidityEl.textContent = 'Humidity: ' + data.list[15].main.humidity + '%';

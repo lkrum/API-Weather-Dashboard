@@ -1,4 +1,3 @@
-
 header {
   background-image: linear-gradient(to right, #9eb3ff, #3c5bc8, #293ba5, #192984);
   padding: 8px;
@@ -10,6 +9,7 @@ header {
 h1 {
   font-size: 38px;
 }
+
 .container {
   margin-top: 10px;
   margin-left: 0;
@@ -32,8 +32,8 @@ h1 {
 }
 
 #search-input {
-margin-left: 3px;
-padding: 7px;
+  margin-left: 3px;
+  padding: 7px;
 }
 
 #search-btn {
@@ -75,36 +75,69 @@ padding: 7px;
   color: rgb(0, 0, 0)
 }
 
-#day-one {
-  border: black solid 1px;
+#day-0 {
+  border: black solid 2px;
   padding: 6px;
+  padding-left: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 900px;
+  background-color: #2cb1da;
 }
 
 #city-name {
-  font-size: 25px;
+  font-size: 30px;
 }
 
 #five-day-forecast {
-position: relative;
+  position: relative;
 
 }
 
 #card-container {
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .day-card {
-color: white;
-background-color: #4d4c5d;
-width: 100% !important;
-padding: 10px 40px 20px 5px;
-margin: 10px;
-list-style: none;
+  color: white;
+  background-color: #4d4c5d;
+  width: 60rem;
+  padding: 10px 40px 20px 5px;
+  margin: 10px;
+  list-style: none;
+  text-align: left;
+  line-height: 30px;
+  display: inline;
+}
+
+.date {
+  font-size: 24px;
+}
+
+.icon {
+  max-width: 250px;
+}
+
+.temp {
+  font-size: 20px;
+  text-align: left;
+  color: #feb78a; 
+  font-weight: 800;
+}
+
+.wind {
+font-size: 20px;
 text-align: left;
-line-height: 30px;
-display: inline;
+color: #adc5ff;
+font-weight: 800;
+
+}
+
+.humidity {
+  font-size: 20px;
+  text-align: left;
+  color: #6fd1ff;
+  font-weight: 800;
+
 }
