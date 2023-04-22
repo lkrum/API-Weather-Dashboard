@@ -5,7 +5,9 @@ Using [Openweather.org's](https://openweathermap.org/forecast5) five-day forecas
 
 The development taught me a lot about how to use APIs, how to grab and display data from the API onto my webpage, and the importance of defining variables in the proper scope and calling functions in the right places.
 
-Link to live page: 
+Link to live page: https://lkrum.github.io/API-Weather-Dashboard/
+
+![Demonstration](./assets/Weather%20Dashboard.gif)
 
 ## Installation
 N/A
@@ -14,6 +16,7 @@ N/A
 1. Input a city name in the search bar on the left
 2. Click the 'search' button or hit 'enter' on your keyboard
 3. The page will then populate with the weather data for that city
+4. Click the buttons in the search history to populate history data
 
 ## Credits 
 This app was created using [Openweather.org's](https://openweathermap.org/forecast5) five-day forcast API. I also used jquery and Day.js.
