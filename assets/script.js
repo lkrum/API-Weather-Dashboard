@@ -13,7 +13,7 @@ var apiKey = '40b10aa426a06b771a72b081e7b57995';
 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 var lon;
 var lat;
-var latlonURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
+var latlonURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 var historyArray = [];
 var city = document.getElementById('search-input').value;
 
@@ -66,7 +66,7 @@ searchBtn.addEventListener('click', function (event) {
 // get city coordinates
 // AskBCS Learning Assistant helped me pass the city variable into the function and then call the function correctly
 function getCityCoord(city) {
-  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`)
     .then(function (response) {
       return response.json();
     })
